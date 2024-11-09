@@ -1,57 +1,87 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Form, Button, Card } from 'react-bootstrap';
+import { FaUser, FaLock } from 'react-icons/fa';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('User');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (role === 'HR') {
-      navigate('/hr-dashboard');
+    if (password === '') {
+      alert("Password cannot be empty");
+      return;
+    }
+    if (username === '') {
+      alert("Username cannot be empty");
+      return;
+    }
+
+    // Route based on username
+    if (username.toLowerCase() === 'hr') {
+      navigate('/hr-dashboard'); // HR home page
     } else {
-      navigate('/user-dashboard');
+      navigate('/user-dashboard'); // User home page
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>University at Buffalo SafeSpace Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+    <div className="d-flex align-items-center justify-content-center min-vh-100" style={{ backgroundColor: '#e9ecef' }}>
+      <Container className="text-center">
+        <img
+          src={`${process.env.PUBLIC_URL}/logoub.png`}
+          alt="University at Buffalo Logo"
+          className="mb-3"
+          style={{ width: '200px' }}
         />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label>
-          <input
-            type="radio"
-            value="User"
-            checked={role === 'User'}
-            onChange={() => setRole('User')}
-          />
-          User
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="HR"
-            checked={role === 'HR'}
-            onChange={() => setRole('HR')}
-          />
-          HR
-        </label>
-        <button type="submit">Login</button>
-      </form>
+        <h2 className="mb-4">Login Required</h2>
+        
+        <Card style={{ maxWidth: '400px', margin: '0 auto' }} className="p-4 shadow-sm">
+          <Form onSubmit={handleLogin}>
+            <Form.Group controlId="formUsername" className="mb-3">
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <FaUser />
+                  </span>
+                </div>
+                <Form.Control
+                  type="text"
+                  placeholder="UBITName"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
+            </Form.Group>
+
+            <Form.Group controlId="formPassword" className="mb-3">
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <FaLock />
+                  </span>
+                </div>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </Form.Group>
+
+            <Button type="submit" variant="dark" className="w-100 mb-3">
+              Log In
+            </Button>
+
+            
+          </Form>
+        </Card>
+      </Container>
     </div>
   );
 };

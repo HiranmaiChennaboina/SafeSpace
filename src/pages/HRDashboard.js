@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
-
-const UserDashboard = () => {
+const HRDashboard = () => {
   return (
     <div>
       {/* Header Bar */}
@@ -22,18 +21,19 @@ const UserDashboard = () => {
             <Button variant="outline-light" className="me-2" href="/report-incident">Report Incident</Button>
             <Button variant="outline-light" className="me-2" href="/chat-support">Chat Support</Button>
             <Button variant="outline-light" href="/resources">Resources</Button>
+            <Button variant="outline-light" href="/Analysis"> Analysis</Button>
           </Nav>
         </Container>
       </Navbar>
 
       {/* Main Content */}
       <Container className="text-center mt-5">
-        <h2>Welcome to the Safe Space</h2>
+        <h2>Welcome to SafeSpace</h2>
         <p>
-          This Page provides access to resources, incident reporting, and support services to help you in creating a safer workplace.
+          Access detailed analytics, reports, and settings to help manage workplace safety and respond to incidents effectively.
         </p>
         <img
-          src={`${process.env.PUBLIC_URL}/logoub2.png`} 
+          src={`${process.env.PUBLIC_URL}/logoub2.png`}
           alt="University at Buffalo Logo"
           style={{ width: '1000px', marginTop: '50px' }}
         />
@@ -42,4 +42,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default HRDashboard;
