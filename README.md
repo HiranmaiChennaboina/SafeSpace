@@ -1,7 +1,3 @@
-# SafeSpace
-Here's a template for a comprehensive README file for your **SafeSpace: Anonymous Reporting for Workplace Harassment** project:
-
----
 
 # SafeSpace: Anonymous Reporting for Workplace Harassment
 
