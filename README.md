@@ -97,6 +97,7 @@ These instructions will help you set up and run the project locally on your mach
 ## API Endpoints
 - **POST** `/api/incidents/submit`: Submits a new incident report.
 - **GET** `/api/incidents/analysis`: Retrieves aggregated incident data for visualization.
+- **POST** `/api/incidents/authorize`: Authorizes a user
 
 ## Project Structure
 ```
