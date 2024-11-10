@@ -135,6 +135,7 @@ safespace
 - **Customizable Alerts**: Implement notifications for HR when specific incident patterns are detected.
 - **Multi-language Support**: Enhance accessibility with multiple language options.
 - **User Authentication**: Add authentication for more secure access to HR dashboards.
+- **Real Time Chat Support**: Integrate a real-time chat support feature to assist users during the reporting process and provide immediate help.
 
 ## Contributing
 Contributions are welcome! Feel free to open a pull request or issue for suggestions and improvements.
