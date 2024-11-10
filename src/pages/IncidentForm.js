@@ -22,7 +22,7 @@ const IncidentForm = () => {
     setEthnicity((prev) => (checked ? [...prev, value] : prev.filter((e) => e !== value)));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const reportData = {
       incidentType,
@@ -35,8 +35,25 @@ const IncidentForm = () => {
       gender,
       ethnicity,
     };
-    console.log(reportData); // Placeholder for actual submission logic
-    alert("Incident report submitted successfully!");
+
+    try {
+      const response = await fetch('http://localhost:5001/api/incidents/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reportData),
+      });
+
+      if (response.ok) {
+        alert('Incident report submitted successfully!');
+      } else {
+        alert('Failed to submit incident report.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while submitting the report.');
+    }
   };
 
   return (
