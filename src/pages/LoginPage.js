@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (password === "") {
       alert("Password cannot be empty");
@@ -18,31 +18,42 @@ const LoginPage = () => {
       alert("Username cannot be empty");
       return;
     }
-
+    const creds = {username,password}
+    try {
+      const response = await fetch('http://localhost:5001/api/incidents/authorize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(creds),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const role = data.role;
+        
+        // Clear credentials
+        setUsername("");
+        setPassword("");
+        if (role.toLowerCase() === "hr") {
+          navigate("/hr-dashboard");
+        } else if (role.toLowerCase() === "user") {
+          navigate("/user-dashboard");
+        } else {
+          alert("Invalid credentials");
+        }
+      } else {
+        alert("Failed to login");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while logging in.");
+    }
+      
     // If we want a secure verification approach here, we can set up a backend endpoint(to a university login details) to verify credentials.
     // from Frontend send credentials to the backend. In the backend verify credentials against a secure source, then
     // respond with a success flag or error message.
 
     // Verify credentials in frontend for now due to time constraints.
-    const isHR = username.toLowerCase() === "hr" && password === "hrpassword";
-    const isUser =
-      (username.toLowerCase() === "user1" && password === "user1password") ||
-      (username.toLowerCase() === "user2" && password === "user2password") ||
-      (username.toLowerCase() === "user3" && password === "user3password");
-
-    if (isHR) {
-      // Redirect to HR dashboard and clear credentials
-      navigate("/hr-dashboard");
-      setUsername(""); // Clear username
-      setPassword(""); // Clear password
-    } else if (isUser) {
-      // Redirect to User dashboard and clear credentials
-      navigate("/user-dashboard");
-      setUsername(""); // Clear username
-      setPassword(""); // Clear password
-    } else {
-      alert("Invalid username or password");
-    }
   };
 
   return (
