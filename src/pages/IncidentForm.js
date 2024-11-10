@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Card } from 'react-bootstrap';
+import { Container, Form, Button, Card, Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const IncidentForm = () => {
+  const navigate = useNavigate();
+
   const [incidentType, setIncidentType] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -9,12 +12,11 @@ const IncidentForm = () => {
   const [anonymous, setAnonymous] = useState(true);
   const [affiliation, setAffiliation] = useState('');
   const [department, setDepartment] = useState('');
-  const [gender, setGender] = useState([]);
+  const [gender, setGender] = useState('');
   const [ethnicity, setEthnicity] = useState([]);
 
   const handleGenderChange = (event) => {
-    const { value, checked } = event.target;
-    setGender((prev) => (checked ? [...prev, value] : prev.filter((g) => g !== value)));
+    setGender(event.target.value);
   };
 
   const handleEthnicityChange = (event) => {
@@ -47,6 +49,16 @@ const IncidentForm = () => {
 
       if (response.ok) {
         alert('Incident report submitted successfully!');
+        // Reset all fields after submission
+        setIncidentType('');
+        setDescription('');
+        setDate('');
+        setLocation('');
+        setAnonymous(true);
+        setAffiliation('');
+        setDepartment('');
+        setGender('');
+        setEthnicity([]);
       } else {
         alert('Failed to submit incident report.');
       }
@@ -67,6 +79,12 @@ const IncidentForm = () => {
             style={{ width: '50px', marginRight: '10px' }}
           />
           <h2 className="text-white mb-0">Incident Report</h2>
+          {/* Home Button */}
+          <Nav className="ms-auto">
+            <Button variant="outline-light" onClick={() => navigate(-1)} className="me-2">
+              Home
+            </Button>
+          </Nav>
         </Container>
       </div>
 
@@ -159,15 +177,45 @@ const IncidentForm = () => {
               />
             </Form.Group>
 
-            {/* Gender Checkbox Group */}
+            {/* Gender Radio Button Group */}
             <Form.Group controlId="gender" className="mb-3">
               <Form.Label>Gender (optional)</Form.Label>
               <div>
-                <Form.Check inline label="Female" type="checkbox" value="Female" onChange={handleGenderChange} />
-                <Form.Check inline label="Male" type="checkbox" value="Male" onChange={handleGenderChange} />
-                <Form.Check inline label="Nonbinary" type="checkbox" value="Nonbinary" onChange={handleGenderChange} />
-                <Form.Check inline label="Other" type="checkbox" value="Other" onChange={handleGenderChange} />
-                <Form.Check inline label="Prefer not to say" type="checkbox" value="Prefer not to say" onChange={handleGenderChange} />
+                <Form.Check
+                  type="radio"
+                  label="Female"
+                  value="Female"
+                  checked={gender === 'Female'}
+                  onChange={handleGenderChange}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Male"
+                  value="Male"
+                  checked={gender === 'Male'}
+                  onChange={handleGenderChange}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Nonbinary"
+                  value="Nonbinary"
+                  checked={gender === 'Nonbinary'}
+                  onChange={handleGenderChange}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Other"
+                  value="Other"
+                  checked={gender === 'Other'}
+                  onChange={handleGenderChange}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Prefer not to say"
+                  value="Prefer not to say"
+                  checked={gender === 'Prefer not to say'}
+                  onChange={handleGenderChange}
+                />
               </div>
             </Form.Group>
 
@@ -182,16 +230,6 @@ const IncidentForm = () => {
                 <Form.Check label="American Indian or Alaska Native" type="checkbox" value="American Indian or Alaska Native" onChange={handleEthnicityChange} />
                 <Form.Check label="Native Hawaiian or Other Pacific Islander" type="checkbox" value="Native Hawaiian or Other Pacific Islander" onChange={handleEthnicityChange} />
               </div>
-            </Form.Group>
-
-            {/* Anonymity Checkbox */}
-            <Form.Group controlId="anonymous" className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label="Remain Anonymous"
-                checked={anonymous}
-                onChange={() => setAnonymous(!anonymous)}
-              />
             </Form.Group>
 
             {/* Submit Button */}

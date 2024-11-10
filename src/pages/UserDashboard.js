@@ -1,8 +1,13 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserDashboard = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate('/'); // Redirect to the login page
+  };
   return (
     <div>
       {/* Header Bar */}
@@ -19,9 +24,10 @@ const UserDashboard = () => {
           </Navbar.Brand>
           {/* Header Buttons */}
           <Nav className="ml-auto">
-            <Button variant="outline-light" className="me-2" href="/report-incident">Report Incident</Button>
-            <Button variant="outline-light" className="me-2" href="/chat-support">Chat Support</Button>
-            <Button variant="outline-light" href="/resources">Resources</Button>
+            <Button variant="outline-light" className="mx-2" href="/report-incident">Report Incident</Button>
+            <Button variant="outline-light" className="mx-2" href="/chat-support">Chat Support</Button>
+            <Button variant="outline-light" className="mx-2" href="/resources">Resources</Button>
+            <Button variant="outline-light" className="mx-2" onClick={handleLogout}>Logout</Button> {/* Logout Button */}
           </Nav>
         </Container>
       </Navbar>
