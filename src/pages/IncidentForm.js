@@ -223,13 +223,49 @@ const IncidentForm = () => {
             <Form.Group controlId="ethnicity" className="mb-3">
               <Form.Label>Race and Ethnicity (select as many as apply, optional)</Form.Label>
               <div>
-                <Form.Check label="White" type="checkbox" value="White" onChange={handleEthnicityChange} />
-                <Form.Check label="Black/African American" type="checkbox" value="Black/African American" onChange={handleEthnicityChange} />
-                <Form.Check label="Hispanic or Latinx" type="checkbox" value="Hispanic or Latinx" onChange={handleEthnicityChange} />
-                <Form.Check label="Asian" type="checkbox" value="Asian" onChange={handleEthnicityChange} />
-                <Form.Check label="American Indian or Alaska Native" type="checkbox" value="American Indian or Alaska Native" onChange={handleEthnicityChange} />
-                <Form.Check label="Native Hawaiian or Other Pacific Islander" type="checkbox" value="Native Hawaiian or Other Pacific Islander" onChange={handleEthnicityChange} />
-              </div>
+              <Form.Check
+                label="White"
+                type="checkbox"
+                value="White"
+                checked={ethnicity.includes("White")}
+                onChange={handleEthnicityChange}
+              />
+              <Form.Check
+                label="Black/African American"
+                type="checkbox"
+                value="Black/African American"
+                checked={ethnicity.includes("Black/African American")}
+                onChange={handleEthnicityChange}
+              />
+              <Form.Check
+                label="Hispanic or Latinx"
+                type="checkbox"
+                value="Hispanic or Latinx"
+                checked={ethnicity.includes("Hispanic or Latinx")}
+                onChange={handleEthnicityChange}
+              />
+              <Form.Check
+                label="Asian"
+                type="checkbox"
+                value="Asian"
+                checked={ethnicity.includes("Asian")}
+                onChange={handleEthnicityChange}
+              />
+              <Form.Check
+                label="American Indian or Alaska Native"
+                type="checkbox"
+                value="American Indian or Alaska Native"
+                checked={ethnicity.includes("American Indian or Alaska Native")}
+                onChange={handleEthnicityChange}
+              />
+              <Form.Check
+                label="Native Hawaiian or Other Pacific Islander"
+                type="checkbox"
+                value="Native Hawaiian or Other Pacific Islander"
+                checked={ethnicity.includes("Native Hawaiian or Other Pacific Islander")}
+                onChange={handleEthnicityChange}
+              />
+            </div>
             </Form.Group>
 
             {/* Submit Button */}
