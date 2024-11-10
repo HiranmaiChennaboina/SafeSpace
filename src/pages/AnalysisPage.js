@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import { Bar, Pie, Line, Doughnut } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, ArcElement, Title, Tooltip, Legend, PointElement } from 'chart.js';
-import '/Users/hiranmaichennaboina/my_learning/SafeSpace/src/AnalysisPage.css'; // Import the CSS file
+import '../styles/AnalysisPage.css'; // Import the CSS file
 
 // Register components
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, ArcElement, Title, Tooltip, Legend, PointElement);
