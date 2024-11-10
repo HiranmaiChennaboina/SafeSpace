@@ -1,5 +1,5 @@
 
-# SafeSpace: Anonymous Reporting for Workplace Harassment
+# SafeSpace: Anonymous Reporting for University Harassment
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -37,6 +37,8 @@
 
 ## Getting Started
 These instructions will help you set up and run the project locally on your machine.
+
+
 
 ### Prerequisites
 - **Node.js** (v14+)
