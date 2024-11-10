@@ -1,4 +1,5 @@
 const Incident = require('../models/Incident');
+const User = require('../models/User');
 const { encryptText } = require('../utils/encryption');
 
 exports.submitIncident = async (req, res) => {
@@ -56,3 +57,20 @@ exports.getIncidentAnalysis = async (req, res) => {
     }
   };
   
+  exports.userAuthentication = async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const isMatch = password === user.password;
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+      return res.status(200).json({ role: user.role });
+    } catch (error) {
+      console.error("Error during authentication:", error);
+      return res.status(500).json({ message: "Server error" });
+    }
+  };
